@@ -457,8 +457,8 @@
 
 				// PageLoad function
 				// This function is called when:
-				// 1. after calling $.historyInit();
-				// 2. after calling $.historyLoad();
+				// 1. after calling $.history.init();
+				// 2. after calling $.history.load();
 				// 3. after pushing "Go Back" button of a browser
 				function pageload(hash) {
 					// alert("pageload: " + hash);
@@ -472,7 +472,7 @@
 
 				// Initialize history plugin.
 				// The callback is called at once by present location.hash. 
-				$.historyInit(pageload, "advanced.html");
+				$.history.init(pageload, "advanced.html");
 
 				// set onlick event for buttons using the jQuery 1.3 live method
 				$("a[rel='history']").live('click', function() {
@@ -484,7 +484,7 @@
 					// moves to a new page. 
 					// pageload is called at once. 
 					// hash don't contain "#", "?"
-					$.historyLoad(hash);
+					$.history.load(hash);
 
 					return false;
 				});

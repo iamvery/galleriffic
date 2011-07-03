@@ -492,7 +492,7 @@
 				var imageData = this.data[index];
 				
 				if (!bypassHistory && this.enableHistory)
-					$.historyLoad(String(imageData.hash));  // At the moment, historyLoad only accepts string arguments
+					$.history.load(String(imageData.hash));  // At the moment, history.load only accepts string arguments
 				else
 					this.gotoImage(imageData);
 
@@ -865,7 +865,7 @@
 		$.extend(this, defaults, settings);
 		
 		// Verify the history plugin is available
-		if (this.enableHistory && !$.historyInit)
+		if (this.enableHistory && !$.history.init)
 			this.enableHistory = false;
 		
 		// Select containers
