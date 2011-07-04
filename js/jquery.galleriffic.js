@@ -72,10 +72,9 @@
 		maxPagesToShow:            7,
 		imageContainerSel:         '',
 		captionContainerSel:       '',
-		controlsContainerSel:      '',
+		ssControlsContainerSel:    '',
+		navControlsContainerSel:   '',
 		loadingContainerSel:       '',
-		renderSSControls:          true,
-		renderNavControls:         true,
 		playLinkText:              'Play',
 		pauseLinkText:             'Pause',
 		prevLinkText:              'Previous',
@@ -382,8 +381,8 @@
 					this.slideshowTimeout = undefined;
 				}
 
-				if (this.$controlsContainer) {
-					this.$controlsContainer
+				if (this.$ssControlsContainer) {
+					this.$ssControlsContainer
 						.find('div.ss-controls a').removeClass().addClass('play')
 						.attr('title', this.playLinkText)
 						.attr('href', '#play')
@@ -397,8 +396,8 @@
 			play: function() {
 				this.isSlideshowRunning = true;
 
-				if (this.$controlsContainer) {
-					this.$controlsContainer
+				if (this.$ssControlsContainer) {
+					this.$ssControlsContainer
 						.find('div.ss-controls a').removeClass().addClass('pause')
 						.attr('title', this.pauseLinkText)
 						.attr('href', '#pause')
@@ -537,8 +536,8 @@
 				var index = imageData.index;
 
 				// Update Controls
-				if (this.$controlsContainer) {
-					this.$controlsContainer
+				if (this.$navControlsContainer) {
+					this.$navControlsContainer
 						.find('div.nav-controls a.prev').attr('href', '#'+this.data[this.getPrevIndex(index)].hash).end()
 						.find('div.nav-controls a.next').attr('href', '#'+this.data[this.getNextIndex(index)].hash);
 				}
@@ -891,34 +890,32 @@
 			this.$loadingContainer.hide();
 
 		// Setup controls
-		if (this.controlsContainerSel) {
-			this.$controlsContainer = $(this.controlsContainerSel).empty();
-			
-			if (this.renderSSControls) {
-				if (this.autoStart) {
-					this.$controlsContainer
-						.append('<div class="ss-controls"><a href="#pause" class="pause" title="'+this.pauseLinkText+'">'+this.pauseLinkText+'</a></div>');
-				} else {
-					this.$controlsContainer
-						.append('<div class="ss-controls"><a href="#play" class="play" title="'+this.playLinkText+'">'+this.playLinkText+'</a></div>');
-				}
-
-				this.$controlsContainer.find('div.ss-controls a')
-					.click(function(e) {
-						gallery.toggleSlideshow();
-						e.preventDefault();
-						return false;
-					});
+		if (this.ssControlsContainerSel) {
+			this.$ssControlsContainer = $(this.ssControlsContainerSel).empty();
+			if (this.autoStart) {
+				this.$ssControlsContainer
+					.append('<div class="ss-controls"><a href="#pause" class="pause" title="'+this.pauseLinkText+'">'+this.pauseLinkText+'</a></div>');
+			} else {
+				this.$ssControlsContainer
+					.append('<div class="ss-controls"><a href="#play" class="play" title="'+this.playLinkText+'">'+this.playLinkText+'</a></div>');
 			}
+        
+			this.$ssControlsContainer.find('div.ss-controls a')
+				.click(function(e) {
+					gallery.toggleSlideshow();
+					e.preventDefault();
+					return false;
+				});
+		}
 		
-			if (this.renderNavControls) {
-				this.$controlsContainer
-					.append('<div class="nav-controls"><a class="prev" rel="history" title="'+this.prevLinkText+'">'+this.prevLinkText+'</a><a class="next" rel="history" title="'+this.nextLinkText+'">'+this.nextLinkText+'</a></div>')
-					.find('div.nav-controls a')
-					.click(function(e) {
-						gallery.clickHandler(e, this);
-					});
-			}
+		if (this.navControlsContainerSel) {
+			this.$navControlsContainer = $(this.navControlsContainerSel).empty();
+			this.$navControlsContainer
+				.append('<div class="nav-controls"><a class="prev" rel="history" title="'+this.prevLinkText+'">'+this.prevLinkText+'</a><a class="next" rel="history" title="'+this.nextLinkText+'">'+this.nextLinkText+'</a></div>')
+				.find('div.nav-controls a')
+				.click(function(e) {
+					gallery.clickHandler(e, this);
+				});
 		}
 
 		var initFirstImage = !this.enableHistory || !location.hash;

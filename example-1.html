@@ -16,6 +16,7 @@
 				<!-- Start Minimal Gallery Html Containers -->
 				<div id="gallery" class="content">
 					<div id="controls" class="controls"></div>
+					<div id="nav" class="controls"></div>
 					<div class="slideshow-container">
 						<div id="loading" class="loader"></div>
 						<div id="slideshow" class="slideshow"></div>
@@ -133,8 +134,9 @@
 			$(document).ready(function() {				
 				// Initialize Minimal Galleriffic Gallery
 				$('#thumbs').galleriffic({
-					imageContainerSel:      '#slideshow',
-					controlsContainerSel:   '#controls'
+					imageContainerSel:       '#slideshow',
+					ssControlsContainerSel:  '#controls',
+					navControlsContainerSel: '#nav'
 				});
 			});
 		</script>

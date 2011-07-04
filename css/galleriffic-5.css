@@ -48,7 +48,7 @@ div.slideshow-container {
 	position: relative;
 	clear: both;
 	float: left;
-	height: 532px;
+	height: 562px;
 }
 
 div.loader {
@@ -62,7 +62,6 @@ div.loader {
 div.slideshow span.image-wrapper {
 	display: block;
 	position: absolute;
-	top: 30px;
 	left: 0;
 }
 div.slideshow a.advance-link {
