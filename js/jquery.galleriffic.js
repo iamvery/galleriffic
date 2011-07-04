@@ -6,6 +6,8 @@
  *   http://www.opensource.org/licenses/mit-license.php
  *
  * Much thanks to primary contributer Ponticlaro (http://www.ponticlaro.com)
+ *
+ * Modifed by Jay Hayes (http://iamvery.com)
  */
 ;(function($) {
 	// Globally keep track of all images by their unique hash.  Each item is an image data object.
@@ -14,7 +16,7 @@
 
 	// Galleriffic static class
 	$.galleriffic = {
-		version: '2.0.1',
+		version: '2.0.2',
 
 		// Strips invalid characters and any leading # characters
 		normalizeHash: function(hash) {
