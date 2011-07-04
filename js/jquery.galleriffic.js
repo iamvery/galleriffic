@@ -84,6 +84,8 @@
 		nextPageLinkText:          'Next &rsaquo;',
 		prevPageLinkText:          '&lsaquo; Prev',
 		enableHistory:             false,
+		enableFancybox:            false,
+		fancyOptions:              {}, 
 		enableKeyboardNavigation:  true,
 		autoStart:                 false,
 		syncTransitions:           false,
@@ -146,6 +148,7 @@
 				var slideUrl = $aThumb.attr('href');
 				var title = $aThumb.attr('title');
 				var $caption = $li.find('.caption').remove();
+				var $fancy = $li.find('a.fancy').remove();
 				var hash = $aThumb.attr('name');
 
 				// Increment the image counter
@@ -164,6 +167,7 @@
 					title:title,
 					slideUrl:slideUrl,
 					caption:$caption,
+					fancy:$fancy,
 					hash:hash,
 					gallery:this,
 					index:position
@@ -632,14 +636,21 @@
 
 				// Construct new hidden span for the image
 				var newSlide = this.$imageContainer
-					.append('<span class="image-wrapper current"><a class="advance-link" rel="history" href="#'+this.data[nextIndex].hash+'" title="'+imageData.title+'">&nbsp;</a></span>')
+					.append('<span class="image-wrapper current"></span>')
 					.find('span.current').css('opacity', '0');
-				
-				newSlide.find('a')
-					.append(imageData.image)
-					.click(function(e) {
+
+				if (this.enableFancybox && imageData.fancy.attr('href')) {
+					newSlide.append('<a class="fancy-link" href="' + imageData.fancy.attr('href') + '" title="' + imageData.title + '">&nbsp;</a>');
+					newSlide.find('a').fancybox(this.fancyOptions);
+				} else {
+					newSlide.append('<a class="advance-link" rel="history" href="#'+this.data[nextIndex].hash+'" title="'+imageData.title+'">&nbsp;</a>');
+					newSlide.find('a').click(function(e) {
 						gallery.clickHandler(e, this);
 					});
+				}
+
+				newSlide.find('a')
+					.append(imageData.image);
 				
 				var newCaption = 0;
 				if (this.$captionContainer) {
@@ -872,6 +883,10 @@
 		// Verify the history plugin is available
 		if (this.enableHistory && !$.history)
 			this.enableHistory = false;
+		
+		// Verify the fancybox plugin is available
+		if (this.enableFancybox && !$.fancybox)
+			this.enableFancybox = false;
 		
 		// Select containers
 		if (this.imageContainerSel) this.$imageContainer = $(this.imageContainerSel);
