@@ -16,7 +16,7 @@
 
 	// Galleriffic static class
 	$.galleriffic = {
-		version: '2.0.3',
+		version: '2.1.0',
 
 		// Strips invalid characters and any leading # characters
 		normalizeHash: function(hash) {
