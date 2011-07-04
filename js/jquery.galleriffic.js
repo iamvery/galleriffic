@@ -870,7 +870,7 @@
 		$.extend(this, defaults, settings);
 		
 		// Verify the history plugin is available
-		if (this.enableHistory && !$.history.init)
+		if (this.enableHistory && !$.history)
 			this.enableHistory = false;
 		
 		// Select containers
