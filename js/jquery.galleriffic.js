@@ -504,7 +504,11 @@
 			gotoImage: function(imageData) {
 				var index = imageData.index;
 
-				if (this.onSlideChange)
+				// Prevent reloading same image
+				if (this.currentImage && this.currentImage.index == index)
+					return this;
+
+				if (this.onSlideChange && this.currentImage)
 					this.onSlideChange(this.currentImage.index, index);
 				
 				this.currentImage = imageData;
@@ -880,7 +884,6 @@
 			this.maxPagesToShow = 3;
 
 		this.displayedPage = -1;
-		this.currentImage = this.data[0];
 		var gallery = this;
 
 		// Hide the loadingContainer
