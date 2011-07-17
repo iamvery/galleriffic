@@ -10,4 +10,4 @@ Project modification by Jay Hayes (http://iamvery.com)
 
 Integration with Fancybox
 -------------------------
-Check out the Galleriffic integration with Fancybox (http://fancybox.net) at tag: v2.1.0.rc1
+Check out the Galleriffic integration with Fancybox (http://fancybox.net) at tag: v2.1.1.rc2
