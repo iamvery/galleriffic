@@ -16,7 +16,7 @@
 
 	// Galleriffic static class
 	$.galleriffic = {
-		version: '2.1.1',
+		version: '2.1.2',
 
 		// Strips invalid characters and any leading # characters
 		normalizeHash: function(hash) {
@@ -96,7 +96,8 @@
 		onPageTransitionOut:       undefined, // accepts a delegate like such: function(callback) { ... }
 		onPageTransitionIn:        undefined, // accepts a delegate like such: function() { ... }
 		onImageAdded:              undefined, // accepts a delegate like such: function(imageData, $li) { ... }
-		onImageRemoved:            undefined  // accepts a delegate like such: function(imageData, $li) { ... }
+		onImageRemoved:            undefined, // accepts a delegate like such: function(imageData, $li) { ... }
+		onTransitionComplete:      undefined  // accepts a delegate like such: function() { ... }
 	};
 
 	// Primary Galleriffic initialization function that should be called on the thumbnail container.
@@ -520,6 +521,9 @@
 				this.preloadRelocate(index);
 				
 				this.refresh();
+				
+				if (this.onTransitionComplete)
+					this.onTransitionComplete();
 				
 				return this;
 			},
