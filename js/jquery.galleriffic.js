@@ -115,7 +115,9 @@
 				if (!this.enableHistory) {
 					// The href attribute holds the unique hash for an image
 					var hash = $.galleriffic.normalizeHash($(link).attr('href'));
-					$.galleriffic.gotoImage(hash);
+          if (hash != this.currentImage.hash) {
+            $.galleriffic.gotoImage(hash);
+          }
 					e.preventDefault();
 				}
 			},
