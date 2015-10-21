@@ -629,6 +629,7 @@
 			buildImage: function(imageData, isSync) {
 				var gallery = this;
 				var nextIndex = this.getNextIndex(imageData.index);
+				this.$imageContainer.empty(); // this prevent image double when rapid click on thumbnail
 
 				// Construct new hidden span for the image
 				var newSlide = this.$imageContainer
